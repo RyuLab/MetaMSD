@@ -4,13 +4,14 @@ message()
 message("MetaMSD (Meta Analysis for Mass Spectrometry Data)")
 message()
 
-#	Using BioConductor to install any missing required packages.
+#	Using BiocManager to install any missing required packages.
 
 list.of.packages <- c("ROCR","stats","gridExtra","gtable","optparse","qvalue")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)){
-	source("https://bioconductor.org/biocLite.R")
-	biocLite( new.packages )
+	if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+	BiocManager::install(new.packages)
 }
 
 
